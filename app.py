@@ -41,9 +41,9 @@ def verify_signature(public_key, transaction, signature):
 # Server function to handle incoming transaction requests
 def run_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind(('localhost', 12345))
+    server_socket.bind(('localhost', 12346))  # Changed to port 12346
     server_socket.listen(1)
-    print("Server is listening on port 12345...")
+    print("Server is listening on port 12346...")
 
     while True:
         conn, addr = server_socket.accept()
@@ -83,7 +83,7 @@ if st.button("Submit Transaction"):
 
         # Send the transaction, hash, and signature to the server
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
-            client_socket.connect(('localhost', 12345))
+            client_socket.connect(('localhost', 12346))  # Updated port
             data_to_send = f"{transaction}|{hash_value}|{signature}"
             client_socket.send(data_to_send.encode())
 
